@@ -41,24 +41,28 @@ describe("User Registration", () => {
 
 
   it("should complete a successful sign up, using all fields", async () => {
-    await signUpPage.open();
+    for (var count = 0; count < 5; count++) {
+      await signUpPage.open();
 
-    const fullName = faker.name.fullName();
-    const firstName = fullName.split(" ")[0];
-    const lastName = fullName.split(" ")[1];
+      const fullName = faker.name.fullName();
+      const firstName = fullName.split(" ")[0];
+      const lastName = fullName.split(" ")[1];
 
-    //append a random number to email to lessen chance of creating an email already in use
-    const email =
-      String(Math.floor(Math.random() * 999)) +
-      faker.internet.email(lastName, firstName);
+      //append a random number to email to lessen chance of creating an email already in use
+      const email =
+        String(Math.floor(Math.random() * 999)) +
+        faker.internet.email(lastName, firstName);
 
-    const password = faker.internet.password(20);
-    console.log(
-      "This is the email: ", email, "\n", "This is the password: ", password);
+      const password = faker.internet.password(20);
+      console.log(
+        "This is the email: ", email, "\n", "This is the password: ", password);
 
-    await signUpPage.completeSignUp(firstName, lastName, email, password, password);
-    await expect(browser).toHaveUrl(signUpData.accountPage);
-    await expect(signUpPage.successField).toHaveText(signUpData.successMsg);
+      await signUpPage.completeSignUp(firstName, lastName, email, password, password);
+      await expect(browser).toHaveUrl(signUpData.accountPage);
+      await expect(signUpPage.successField).toHaveText(signUpData.successMsg);
+      await signUpPage.logOut();
+    }
+
   });
 
 });

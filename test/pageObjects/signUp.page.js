@@ -51,6 +51,14 @@ class SignUpPage extends Page {
     return $(".page.messages");
   }
 
+  get actionSwitch() {
+    return $("button[data-action='customer-menu-toggle']");
+  }
+
+  get signOutOption() {
+    return $("li[class='authorization-link']");
+  }
+
   /**
    * a method to encapsule automation code to interact with the page
    * e.g. to sign up using required data fields
@@ -78,6 +86,11 @@ class SignUpPage extends Page {
     await this.passwordField.setValue(password);
     await this.confirmPasswordField.setValue(passwordConfirmation);
     await this.createButton.click();
+  }
+
+  async logOut() {
+    await this.actionSwitch.click();
+    await this.signOutOption.click();
   }
 
   /**
