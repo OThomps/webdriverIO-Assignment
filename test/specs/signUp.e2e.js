@@ -41,6 +41,7 @@ describe("User Registration", () => {
 
 
   it("should complete a successful sign up, using all fields", async () => {
+    //Using for loop to execute sign up 5 times with users generated from faker
     for (var count = 0; count < 5; count++) {
       await signUpPage.open();
 
